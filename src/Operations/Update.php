@@ -16,12 +16,10 @@
  */
 namespace Phramework\Database\Operations;
 
-use \Phramework\Validate\Validate;
 use \Phramework\Database\Database;
 use \Phramework\Exceptions\RequestExceptionException;
 use \Phramework\Exceptions\NotFoundException;
 
-// @codingStandardsIgnoreStart
 /**
  * Update operation for databases
  * @license https://www.apache.org/licenses/LICENSE-2.0 Apache-2.0
@@ -35,40 +33,6 @@ class Update
      */
     public static function update($id, $keys_values, $table, $index = 'id')
     {
-
-        /*
-        //Get unique fields
-        foreach ($model['fields'] as $key => $value) {
-            if (in_array('unique', $value) && isset($keys_values[$key])) {
-                //Check per field if excists except it self
-                if (Database::execute("SELECT "$table"."$index" FROM "$table" WHERE "$table"."$key" = ? AND "$table"."$index" != ? LIMIT 1", [ $keys_values[$key],
-                        $id])) {
-                    throw new request('Unique field ' . $key . ' already exists at another entry');
-                }
-            }
-        }
-
-        if ($entry) {
-            $updated_fields_count = 0;
-            foreach ($keys_values as $key => $value) {
-                if ($value != $entry[$key]) {
-                    ++$updated_fields_count;
-                }
-            }
-            if (!$updated_fields_count) {
-                throw new request('No changes made');
-            }
-        }*/
-
-        /*
-        //Complete type specific fields
-        if (in_array('updated_type', $model)) { // && ( !isset( $keys_values[ 'updated' ] ) || empty( $keys_values['updated'] ) ) ){
-            $keys_values['updated'] = date('Y-m-d H:i:s');
-        }
-        if (in_array('updated_user_id_type', $model)) { // && ( !isset( $keys_values[ 'updated_user_id' ] ) || empty( $keys_values[ 'updated_user_id' ] ) ) ){
-            $user                             = Util::check_permission();
-            $keys_values['updated_user_id'] = $user['id'];
-        }*/
         $query_keys = implode('" = ?,"', array_keys($keys_values));
         $query_values = array_values($keys_values);
         //Push id to the end
@@ -97,4 +61,3 @@ class Update
         return $result;
     }
 }
-// @codingStandardsIgnoreEnd

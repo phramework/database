@@ -127,7 +127,7 @@ class PostgreSQL implements \Phramework\Database\IAdapter
 
         return (
             $castModel && $data
-            ? \Phramework\Models\Filter::castEntry($data, $castModel)
+            ? $data
             : $data
         );
     }
@@ -152,7 +152,7 @@ class PostgreSQL implements \Phramework\Database\IAdapter
 
         return (
             $castModel && $data
-            ? \Phramework\Models\Filter::cast($data, $castModel)
+            ? $data
             : $data
         );
     }
@@ -298,7 +298,7 @@ class PostgreSQL implements \Phramework\Database\IAdapter
 
         return (
             $castModel && $data
-            ? \Phramework\Models\Filter::castEntry($data, $castModel)
+            ? $data
             : $data
         );
     }
@@ -338,7 +338,7 @@ class PostgreSQL implements \Phramework\Database\IAdapter
 
         return (
             $castModel && $data
-            ? \Phramework\Models\Filter::cast($data, $castModel)
+            ? $data
             : $data
         );
     }
