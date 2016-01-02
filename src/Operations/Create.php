@@ -17,8 +17,6 @@
 namespace Phramework\Database\Operations;
 
 use \Phramework\Database\Database;
-use \Phramework\Exceptions\RequestExceptionException;
-use \Phramework\Exceptions\NotFoundException;
 
 /**
  * Create operation for databases

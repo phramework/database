@@ -37,6 +37,7 @@ use \Phramework\Exceptions\DatabaseException;
  * @license https://www.apache.org/licenses/LICENSE-2.0 Apache-2.0
  * @author Xenofon Spafaridis <nohponex@gmail.com>
  * @uses \PDO
+ * @since 0.0.0
  */
 class PostgreSQL implements \Phramework\Database\IAdapter
 {
@@ -56,6 +57,9 @@ class PostgreSQL implements \Phramework\Database\IAdapter
         return $this->adapterName;
     }
 
+    /**
+     * @param object
+     */
     public function __construct($settingsDb)
     {
         //Work with arrays
@@ -83,7 +87,7 @@ class PostgreSQL implements \Phramework\Database\IAdapter
      * @param string $query
      * @param array $parameters
      * @return integer Returns the number of rows affected or selected
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws Phramework\Exceptions\DatabaseException
      */
     public function execute($query, $parameters = [])
     {

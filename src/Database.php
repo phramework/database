@@ -37,7 +37,7 @@ use \PDO;
  * </ul>
  * @license https://www.apache.org/licenses/LICENSE-2.0 Apache-2.0
  * @author Xenofon Spafaridis <nohponex@gmail.com>
- * @since 0
+ * @since 0.0.0
  * @todo Add option to convert fetched data into objects insted of array
  */
 class Database
@@ -86,7 +86,7 @@ class Database
      * @param string $query
      * @param array $parameters
      * @return integer Returns the number of rows affected or selected
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws Phramework\Exceptions\DatabaseException
      * @example
      * ```php
      * $status = Database::execute(
@@ -113,7 +113,7 @@ class Database
      * @param string $query
      * @param array  $parameters Query parameters
      * @return mixed Returns returns the id of last inserted item
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws Phramework\Exceptions\DatabaseException
      * @example
      * ```php
      * $id = Database::executeLastInsertId(
@@ -141,7 +141,7 @@ class Database
      * @param array $castModel [Optional] Default is null, if set then
      * \Phramework\Models\Filter::castEntry will be applied to data
      * @return array
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws Phramework\Exceptions\DatabaseException
      * @example
      * ```php
      * $record = Database::executeAndFetch(
@@ -170,7 +170,7 @@ class Database
      * @param array $castModel [Optional] Default is null, if set then
      * \Phramework\Models\Filter::cast will be applied to data
      * @return array[]
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws Phramework\Exceptions\DatabaseException
      * @example
      * ```php
      * $records = Database::executeAndFetchAll(
@@ -193,7 +193,7 @@ class Database
      * @param string $query
      * @param array  $parameters Query parameters
      * @return array
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws Phramework\Exceptions\DatabaseException
      */
     public static function executeAndFetchArray($query, $parameters = [])
     {
@@ -209,7 +209,7 @@ class Database
      * @param string $query Query string
      * @param array  $parameters Query parameters
      * @return array[]
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws Phramework\Exceptions\DatabaseException
      */
     public static function executeAndFetchAllArray($query, $parameters = [])
     {
@@ -226,7 +226,7 @@ class Database
      * @param string $query Query string
      * @param array  $parameters Query parameters
      * @return mixed
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws Phramework\Exceptions\DatabaseException
      */
     public static function bindExecuteLastInsertId($query, $parameters = [])
     {
@@ -243,7 +243,7 @@ class Database
      * @param string $query Query string
      * @param array  $parameters Query parameters
      * @return integer Returns the number of rows affected or selected
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws Phramework\Exceptions\DatabaseException
      * @uses PDOStatement::bindValue https://secure.php.net/manual/en/pdostatement.bindvalue.php
      * @example
      * ```php
@@ -276,7 +276,7 @@ class Database
      * @param array  $castModel [Optional] Default is null, if set
      * then \Phramework\Models\Filter::castEntry will be applied to data
      * @return array
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws Phramework\Exceptions\DatabaseException
      */
     public static function bindExecuteAndFetch($query, $parameters = [], $castModel = null)
     {
@@ -295,7 +295,7 @@ class Database
      * @param array  $castModel [Optional] Default is null, if set then
      * \Phramework\Models\Filter::castEntry will be applied to data
      * @return array[]
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws Phramework\Exceptions\DatabaseException
      */
     public static function bindExecuteAndFetchAll($query, $parameters = [], $castModel = null)
     {

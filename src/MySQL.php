@@ -37,19 +37,23 @@ use \Phramework\Exceptions\DatabaseException;
  * @license https://www.apache.org/licenses/LICENSE-2.0 Apache-2.0
  * @author Xenofon Spafaridis <nohponex@gmail.com>
  * @uses \PDO
+ * @since 0.0.0
  */
 class MySQL extends \Phramework\Database\PostgreSQL
 {
     protected $adapterName = 'mysql';
 
+    /**
+     * @param object
+     */
     public function __construct($settingsDb)
     {
-        $options = [];
-
         //Work with arrays
         if (is_object($settingsDb)) {
             $settingsDb = (array)$settingsDb;
         }
+
+        $options = [];
 
         $options[PDO::MYSQL_ATTR_USE_BUFFERED_QUERY] = true;
         if (!($this->link = new PDO(

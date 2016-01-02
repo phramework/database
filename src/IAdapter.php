@@ -19,6 +19,7 @@ namespace Phramework\Database;
 /**
  * @license https://www.apache.org/licenses/LICENSE-2.0 Apache-2.0
  * @author Xenofon Spafaridis <nohponex@gmail.com>
+ * @since 0.0.0
  */
 interface IAdapter
 {
@@ -33,8 +34,8 @@ interface IAdapter
      *
      * @param string $query
      * @param array $parameters
-     * @return type
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @return integer
+     * @throws Phramework\Exceptions\DatabaseException
      */
     public function execute($query, $parameters = []);
 
@@ -44,7 +45,7 @@ interface IAdapter
      * @param string $query
      * @param array  $parameters Query parameters
      * @return integer Returns the number of rows affected or selected
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws Phramework\Exceptions\DatabaseException
      */
     public function executeLastInsertId($query, $parameters = []);
 
@@ -57,7 +58,7 @@ interface IAdapter
      * @param array $castModel [Optional] Default is null, if set then
      * \Phramework\Models\Filter::castEntry will be applied to data
      * @return array Returns a single row
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws Phramework\Exceptions\DatabaseException
      */
     public function executeAndFetch($query, $parameters = [], $castModel = null);
 
@@ -69,7 +70,7 @@ interface IAdapter
      * @param array $castModel [Optional] Default is null, if set then
      * \Phramework\Models\Filter::cast will be applied to data
      * @return array[]
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws Phramework\Exceptions\DatabaseException
      */
     public function executeAndFetchAll($query, $parameters = [], $castModel = null);
 
@@ -78,8 +79,8 @@ interface IAdapter
      * Execute a query and fetch first row as array
      * @param string $query
      * @param array  $parameters Query parameters
-     * @return type
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @return array
+     * @throws Phramework\Exceptions\DatabaseException
      */
     public function executeAndFetchArray($query, $parameters = []);
 
@@ -87,8 +88,8 @@ interface IAdapter
      *
      * @param string $query Query string
      * @param array  $parameters Query parameters
-     * @return type
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @return array[]
+     * @throws Phramework\Exceptions\DatabaseException
      */
     public function executeAndFetchAllArray($query, $parameters = []);
 
@@ -97,8 +98,8 @@ interface IAdapter
      *
      * @param string $query Query string
      * @param array Query parameters
-     * @return type
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @return mixed
+     * @throws Phramework\Exceptions\DatabaseException
      */
     public function bindExecuteLastInsertId($query, $parameters = []);
 
@@ -107,8 +108,8 @@ interface IAdapter
      *
      * @param string $query Query string
      * @param array  $parameters Query parameters
-     * @return type
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @return integer
+     * @throws Phramework\Exceptions\DatabaseException
      * @todo provide documentation
      */
     public function bindExecute($query, $parameters = []);
@@ -121,7 +122,7 @@ interface IAdapter
      * @param array $castModel [Optional] Default is null, if set
      * then \Phramework\Models\Filter::castEntry will be applied to data
      * @return array
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws Phramework\Exceptions\DatabaseException
      */
     public function bindExecuteAndFetch($query, $parameters = [], $castModel = null);
 
@@ -132,8 +133,8 @@ interface IAdapter
      * @param array  $parameters Query parameters
      * @param array $castModel [Optional] Default is null, if set then
      * \Phramework\Models\Filter::castEntry will be applied to data
-     * @return type
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @return array[]
+     * @throws Phramework\Exceptions\DatabaseException
      */
     public function bindExecuteAndFetchAll($query, $parameters = [], $castModel = null);
 
