@@ -46,6 +46,9 @@ class PostgreSQL implements \Phramework\Database\IAdapter
      */
     protected $link;
 
+    /**
+     * @var string
+     */
     protected $adapterName = 'postgresql';
 
     /**
@@ -99,10 +102,10 @@ class PostgreSQL implements \Phramework\Database\IAdapter
     /**
      * Execute a query and return last instert id
      *
-     * @param string $query
-     * @param array  $parameters Query parameters
+     * @param  string $query
+     * @param  array  $parameters Query parameters
      * @return mixed Returns the id of last inserted item
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws Phramework\Exceptions\DatabaseException
      */
     public function executeLastInsertId($query, $parameters = [])
     {
@@ -114,12 +117,10 @@ class PostgreSQL implements \Phramework\Database\IAdapter
     /**
      * Execute a query and fetch first row as associative array
      *
-     * @param string $query
-     * @param array  $parameters Query parameters
-     * @param array $castModel [Optional] Default is null, if set then
-     * \Phramework\Models\Filter::castEntry will be applied to data
+     * @param  string $query
+     * @param  array  $parameters Query parameters
      * @return array Returns a single row from database
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws Phramework\Exceptions\DatabaseException
      */
     public function executeAndFetch($query, $parameters = [], $castModel = null)
     {
@@ -139,12 +140,10 @@ class PostgreSQL implements \Phramework\Database\IAdapter
     /**
      * Execute a query and fetch all rows as associative array
      *
-     * @param string $query
-     * @param array  $parameters Query parameters
-     * @param array $castModel [Optional] Default is null, if set then
-     * \Phramework\Models\Filter::cast will be applied to data
+     * @param  string $query
+     * @param  array  $parameters Query parameters
      * @return array[] Returns multiple rows from database
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws Phramework\Exceptions\DatabaseException
      */
     public function executeAndFetchAll($query, $parameters = [], $castModel = null)
     {
@@ -163,10 +162,10 @@ class PostgreSQL implements \Phramework\Database\IAdapter
 
     /**
      * Execute a query and fetch first row as array
-     * @param string $query
-     * @param array  $parameters Query parameters
+     * @param  string $query
+     * @param  array  $parameters Query parameters
      * @return array
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws Phramework\Exceptions\DatabaseException
      */
     public function executeAndFetchArray($query, $parameters = [])
     {
@@ -180,11 +179,10 @@ class PostgreSQL implements \Phramework\Database\IAdapter
     }
 
     /**
-     *
-     * @param string $query Query string
-     * @param array  $parameters Query parameters
+     * @param  string $query Query string
+     * @param  array  $parameters Query parameters
      * @return array[]
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws Phramework\Exceptions\DatabaseException
      * @uses PDO::FETCH_COLUMN
      */
     public function executeAndFetchAllArray($query, $parameters = [])
@@ -203,9 +201,8 @@ class PostgreSQL implements \Phramework\Database\IAdapter
      *
      * @param string $query Query string
      * @param array  $parameters Query parameters
-     * Example [123, ['value' => 123, 'params' => \PDO::PARAM_INT]]
      * @return mixed
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws Phramework\Exceptions\DatabaseException
      */
     public function bindExecuteLastInsertId($query, $parameters = [])
     {
@@ -235,11 +232,10 @@ class PostgreSQL implements \Phramework\Database\IAdapter
     /**
      * Bind Execute a query and return the row count
      *
-     * @param string $query Query string
-     * @param array  $parameters Query parameters
-     * Example [123, ['value' => 123, 'params' => \PDO::PARAM_INT]]
+     * @param  string $query Query string
+     * @param  array  $parameters Query parameters
      * @return integer
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws Phramework\Exceptions\DatabaseException
      * @todo provide documentation
      */
     public function bindExecute($query, $parameters = [])
@@ -269,13 +265,10 @@ class PostgreSQL implements \Phramework\Database\IAdapter
     /**
      * Bind Execute a query and fetch first row as associative array
      *
-     * @param string $query Query string
-     * @param array  $parameters Query parameters
-     * Example [123, ['value' => 123, 'params' => \PDO::PARAM_INT]]
-     * @param array $castModel [Optional] Default is null, if set
-     * then \Phramework\Models\Filter::castEntry will be applied to data
+     * @param  string $query Query string
+     * @param  array  $parameters Query parameters
      * @return array
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws Phramework\Exceptions\DatabaseException
      */
     public function bindExecuteAndFetch($query, $parameters = [], $castModel = null)
     {
@@ -310,13 +303,10 @@ class PostgreSQL implements \Phramework\Database\IAdapter
     /**
      * Bind Execute a query and fetch all rows as associative array
      *
-     * @param string $query Query string
-     * @param array  $parameters Query parameters
-     * Example [123, ['value' => 123, 'params' => \PDO::PARAM_INT]]
-     * @param array $castModel [Optional] Default is null, if set then
-     * \Phramework\Models\Filter::castEntry will be applied to data
+     * @param  string $query Query string
+     * @param  array  $parameters Query parameters
      * @return array[]
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws Phramework\Exceptions\DatabaseException
      */
     public function bindExecuteAndFetchAll($query, $parameters = [], $castModel = null)
     {

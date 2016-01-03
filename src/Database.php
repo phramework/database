@@ -43,7 +43,7 @@ use \PDO;
 class Database
 {
     /**
-     * @var \Phramework\Database\IAdapter
+     * @var Phramework\Database\IAdapter
      */
     protected static $adapter = null;
 
@@ -83,8 +83,8 @@ class Database
     /**
      * Execute a query and return the row count
      *
-     * @param string $query
-     * @param array $parameters
+     * @param  string $query
+     * @param  array $parameters
      * @return integer Returns the number of rows affected or selected
      * @throws Phramework\Exceptions\DatabaseException
      * @example
@@ -110,8 +110,8 @@ class Database
     /**
      * Execute a query and return last instert id
      *
-     * @param string $query
-     * @param array  $parameters Query parameters
+     * @param  string $query
+     * @param  array  $parameters Query parameters
      * @return mixed Returns returns the id of last inserted item
      * @throws Phramework\Exceptions\DatabaseException
      * @example
@@ -136,10 +136,8 @@ class Database
     /**
      * Execute a query and fetch first row as associative array
      *
-     * @param string $query
-     * @param array  $parameters Query parameters
-     * @param array $castModel [Optional] Default is null, if set then
-     * \Phramework\Models\Filter::castEntry will be applied to data
+     * @param  string $query
+     * @param  array  $parameters Query parameters
      * @return array
      * @throws Phramework\Exceptions\DatabaseException
      * @example
@@ -165,10 +163,8 @@ class Database
     /**
      * Execute a query and fetch all rows as associative array
      *
-     * @param string $query
-     * @param array  $parameters Query parameters
-     * @param array $castModel [Optional] Default is null, if set then
-     * \Phramework\Models\Filter::cast will be applied to data
+     * @param  string $query
+     * @param  array  $parameters Query parameters
      * @return array[]
      * @throws Phramework\Exceptions\DatabaseException
      * @example
@@ -190,8 +186,8 @@ class Database
 
     /**
      * Execute a query and fetch first row as array
-     * @param string $query
-     * @param array  $parameters Query parameters
+     * @param  string $query
+     * @param  array  $parameters Query parameters
      * @return array
      * @throws Phramework\Exceptions\DatabaseException
      */
@@ -206,8 +202,8 @@ class Database
 
     /**
      *
-     * @param string $query Query string
-     * @param array  $parameters Query parameters
+     * @param  string $query Query string
+     * @param  array  $parameters Query parameters
      * @return array[]
      * @throws Phramework\Exceptions\DatabaseException
      */
@@ -223,8 +219,8 @@ class Database
     /**
      * Bind Execute a query and return last instert id
      *
-     * @param string $query Query string
-     * @param array  $parameters Query parameters
+     * @param  string $query Query string
+     * @param  array  $parameters Query parameters
      * @return mixed
      * @throws Phramework\Exceptions\DatabaseException
      */
@@ -240,8 +236,8 @@ class Database
     /**
      * Bind Execute a query and return the row count
      *
-     * @param string $query Query string
-     * @param array  $parameters Query parameters
+     * @param  string $query Query string
+     * @param  array  $parameters Query parameters
      * @return integer Returns the number of rows affected or selected
      * @throws Phramework\Exceptions\DatabaseException
      * @uses PDOStatement::bindValue https://secure.php.net/manual/en/pdostatement.bindvalue.php
@@ -271,10 +267,8 @@ class Database
     /**
      * Bind Execute a query and fetch first row as associative array
      *
-     * @param string $query Query string
-     * @param array  $parameters Query parameters
-     * @param array  $castModel [Optional] Default is null, if set
-     * then \Phramework\Models\Filter::castEntry will be applied to data
+     * @param  string $query Query string
+     * @param  array  $parameters Query parameters
      * @return array
      * @throws Phramework\Exceptions\DatabaseException
      */
@@ -290,10 +284,8 @@ class Database
     /**
      * Bind Execute a query and fetch all rows as associative array
      *
-     * @param string $query Query string
-     * @param array  $parameters Query parameters
-     * @param array  $castModel [Optional] Default is null, if set then
-     * \Phramework\Models\Filter::castEntry will be applied to data
+     * @param  string $query Query string
+     * @param  array  $parameters Query parameters
      * @return array[]
      * @throws Phramework\Exceptions\DatabaseException
      */

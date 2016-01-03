@@ -42,8 +42,8 @@ interface IAdapter
     /**
      * Execute a query and return last instert id
      *
-     * @param string $query
-     * @param array  $parameters Query parameters
+     * @param  string $query
+     * @param  array  $parameters Query parameters
      * @return integer Returns the number of rows affected or selected
      * @throws Phramework\Exceptions\DatabaseException
      */
@@ -53,10 +53,8 @@ interface IAdapter
     /**
      * Execute a query and fetch first row as associative array
      *
-     * @param string $query
-     * @param array  $parameters Query parameters
-     * @param array $castModel [Optional] Default is null, if set then
-     * \Phramework\Models\Filter::castEntry will be applied to data
+     * @param  string $query
+     * @param  array  $parameters Query parameters
      * @return array Returns a single row
      * @throws Phramework\Exceptions\DatabaseException
      */
@@ -65,10 +63,8 @@ interface IAdapter
     /**
      * Execute a query and fetch all rows as associative array
      *
-     * @param string $query
-     * @param array  $parameters Query parameters
-     * @param array $castModel [Optional] Default is null, if set then
-     * \Phramework\Models\Filter::cast will be applied to data
+     * @param  string $query
+     * @param  array  $parameters Query parameters
      * @return array[]
      * @throws Phramework\Exceptions\DatabaseException
      */
@@ -96,8 +92,8 @@ interface IAdapter
     /**
      * Bind Execute a query and return last instert id
      *
-     * @param string $query Query string
-     * @param array Query parameters
+     * @param  string $query Query string
+     * @param  array Query parameters
      * @return mixed
      * @throws Phramework\Exceptions\DatabaseException
      */
@@ -117,10 +113,8 @@ interface IAdapter
     /**
      * Bind Execute a query and fetch first row as associative array
      *
-     * @param string $query Query string
-     * @param array  $parameters Query parameters
-     * @param array $castModel [Optional] Default is null, if set
-     * then \Phramework\Models\Filter::castEntry will be applied to data
+     * @param  string $query Query string
+     * @param  array  $parameters Query parameters
      * @return array
      * @throws Phramework\Exceptions\DatabaseException
      */
@@ -129,10 +123,8 @@ interface IAdapter
     /**
      * Bind Execute a query and fetch all rows as associative array
      *
-     * @param string $query Query string
-     * @param array  $parameters Query parameters
-     * @param array $castModel [Optional] Default is null, if set then
-     * \Phramework\Models\Filter::castEntry will be applied to data
+     * @param  string $query Query string
+     * @param  array  $parameters Query parameters
      * @return array[]
      * @throws Phramework\Exceptions\DatabaseException
      */

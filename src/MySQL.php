@@ -41,6 +41,9 @@ use \Phramework\Exceptions\DatabaseException;
  */
 class MySQL extends \Phramework\Database\PostgreSQL
 {
+    /**
+     * @var string
+     */
     protected $adapterName = 'mysql';
 
     /**
