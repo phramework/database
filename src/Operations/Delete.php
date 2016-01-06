@@ -29,13 +29,17 @@ class Delete
     /**
      * Delete database records
      * @param  string|integer $id
+     *     Id value
      * @param  array|object   $additionalAttributes
      *     Additional attributes to use in WHERE $idAttribute
      * @param  string|array   $table                Table's name
-     * @param  string         $idAttribute          **[Optional]** Id attribute
-     * @return boolean
+     * @param  string         $idAttribute          **[Optional]**
+     *     Id attribute
+     * @param  null|integer   $limit                **[Optional]**
+     *     Limit clause, when null there is not limit.
+     * @return integer Return number of affected records
      */
-    public static function delete($id, $additionalAttributes, $table, $idAttribute = 'id')
+    public static function delete($id, $additionalAttributes, $table, $idAttribute = 'id', $limit = 1)
     {
         $queryValues = [$id];
 
@@ -65,12 +69,17 @@ class Delete
             'DELETE FROM "%s"
             WHERE "%s" = ?
               %s
-            LIMIT 1',
+              %s',
             $tableName,
             $idAttribute,
             implode("\n", $additional)
+            (
+                $limit === null
+                ? ''
+                : 'LIMIT ' . $limit
+            )
         );
 
-        return (bool)Database::execute($query, $queryValues);
+        return Database::execute($query, $queryValues);
     }
 }

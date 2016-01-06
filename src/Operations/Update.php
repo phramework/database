@@ -33,10 +33,12 @@ class Update
       * @param  array|object   $keysValues
       * @param  string|array   $table                Table's name
       * @param  string         $idAttribute          **[Optional]** Id attribute
-      * @return boolean
+      * @return integer Return number of affected records
+      * @param  null|integer   $limit                **[Optional]**
+      *     Limit clause, when null there is not limit.
       * @todo Add $additionalAttributes
       */
-    public static function update($id, $keysValues, $table, $idAttribute = 'id')
+    public static function update($id, $keysValues, $table, $idAttribute = 'id', $limit = 1)
     {
         //Work with arrays
         if (is_object($keysValues)) {
@@ -75,10 +77,17 @@ class Update
 
         $query = sprintf(
             'UPDATE %s SET %s" = ?
-              WHERE "%s" = ?',
+              WHERE "%s" = ?
+              %s',
             $tableName,
             $queryKeys,
-            $idAttribute
+            $idAttribute,
+            implode("\n", $additional)
+            (
+                $limit === null
+                ? ''
+                : 'LIMIT ' . $limit
+            )
         );
 
         //Return number of rows affected
