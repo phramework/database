@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2015 Xenofon Spafaridis
+ * Copyright 2015 - 2016 Xenofon Spafaridis
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,11 +35,11 @@ class Create
      * Create a new record in database
      * @param  array|object $attributes  Key-value array or object with records's attributes
      * @param  string $table       Table's name
-     * @param  string|null $schema [Optional] Table's schema, default is null for no schema
+     * @param  string|null $schema *[Optional]* Table's schema, default is null for no schema
      * @param  integer $return     Return method type
-     * - if RETURN_ID will return the id of last inserted record
-     * - if RETURN_RECORDS will return the inserted record
-     * - if RETURN_NUMBER_OF_RECORDS will return the number of records affected
+     * - if **`RETURN_ID`** will return the id of last inserted record
+     * - if **`RETURN_RECORDS`** will return the inserted record
+     * - if **`RETURN_NUMBER_OF_RECORDS`** will return the number of records affected
      * @return integer|array
      * @todo Check RETURNING id for another primary key attribute
      */

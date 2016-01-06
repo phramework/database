@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2015 Xenofon Spafaridis
+ * Copyright 2015 - 2016 Xenofon Spafaridis
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,11 +22,20 @@ use \Phramework\Database\Database;
  * Delete operation for databases
  * @license https://www.apache.org/licenses/LICENSE-2.0 Apache-2.0
  * @author Xenofon Spafaridis <nohponex@gmail.com>
- * @since 1.0.0
+ * @since 0.0.0
  */
 class Delete
 {
-    public static function delete($id, $additionalAttributes, $table, $index = 'id')
+    /**
+     * Delete database records
+     * @param  string|integer $id
+     * @param  array|object   $additionalAttributes
+     *     Additional attributes to use in WHERE $idAttribute
+     * @param  string|array   $table                Table's name
+     * @param  string         $idAttribute          **[Optional]** Id attribute
+     * @return boolean
+     */
+    public static function delete($id, $additionalAttributes, $table, $idAttribute = 'id')
     {
         $queryValues = [$id];
 
@@ -42,14 +51,23 @@ class Delete
             $queryValues[] = $value;
         }
 
+        $tableName = '';
+        if (is_array($table) &&
+            isset($table['schema']) &&
+            isset($table['table'])) {
+            $tableName = '"' . $table['schema'] . '"'
+                .'."' . $table['table'] . '"';
+        } else {
+            $tableName = '"' . $table . '"';
+        }
+
         $query = sprintf(
             'DELETE FROM "%s"
-            WHERE "%s"."%s" = ?
+            WHERE "%s" = ?
               %s
             LIMIT 1',
-            $table,
-            $table,
-            $index,
+            $tableName,
+            $idAttribute,
             implode("\n", $additional)
         );
 

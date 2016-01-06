@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2015 Xenofon Spafaridis
+ * Copyright 2015 - 2016 Xenofon Spafaridis
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,35 +27,62 @@ use \Phramework\Exceptions\NotFoundException;
  */
 class Update
 {
-    /**
-     * Update an entry method
-     */
-    public static function update($id, $keys_values, $table, $index = 'id')
+     /**
+      * Update database records
+      * @param  string|integer $id
+      * @param  array|object   $keysValues
+      * @param  string|array   $table                Table's name
+      * @param  string         $idAttribute          **[Optional]** Id attribute
+      * @return boolean
+      * @todo Add $additionalAttributes
+      */
+    public static function update($id, $keysValues, $table, $idAttribute = 'id')
     {
-        $query_keys = implode('" = ?,"', array_keys($keys_values));
-        $query_values = array_values($keys_values);
-        //Push id to the end
-        $query_values[] = $id;
-
-        $query = 'UPDATE ';
-
-        $table_name = '';
-        if (is_array($table) &&
-            isset($table['schema']) &&
-            isset($table['table'])) {
-            $table_name = '"' . $table['schema'] . '"'
-                .'."' . $table['table'] . '"';
-        } else {
-            $table_name = '"' . $table . '"';
+        //Work with arrays
+        if (is_object($keysValues)) {
+            $keysValues = (array)$keysValues;
         }
 
-        $query.= $table_name;
+        $queryKeys = implode('" = ?,"', array_keys($keysValues));
+        $queryValues = array_values($keysValues);
 
-        $query .= ' SET "' . $query_keys . '" = ? '
-            . 'WHERE ' . $table_name . '."' . $index . '" = ?';
+        //Push id to the end
+        $queryValues[] = $id;
+
+        $tableName = '';
+
+        //Work with array
+        if (is_object($table)) {
+            $table = (array)$table;
+        }
+
+        if (is_array($table)
+            && isset($table['schema'])
+            && isset($table['table'])
+        ) {
+
+            $tableName = sprinf(
+                '"%s"."%s"',
+                $table['schema'],
+                $table['table']
+            );
+        } else {
+            $tableName = sprinf(
+                '"%s"',
+                $table
+            );
+        }
+
+        $query = sprintf(
+            'UPDATE %s SET %s" = ?
+              WHERE "%s" = ?',
+            $tableName,
+            $queryKeys,
+            $idAttribute
+        );
 
         //Return number of rows affected
-        $result = Database::execute($query, $query_values);
+        $result = Database::execute($query, $queryValues);
 
         return $result;
     }
