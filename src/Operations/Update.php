@@ -82,7 +82,7 @@ class Update
             $tableName,
             $queryKeys,
             $idAttribute,
-            implode("\n", $additional)
+            implode("\n", $additional),
             (
                 $limit === null
                 ? ''

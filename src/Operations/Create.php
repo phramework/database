@@ -53,10 +53,27 @@ class Create
             $attributes = (array)$attributes;
         }
 
+
+
+        $driver = Database::getAdapterName();
+
         //prepare query
         $query_keys   = implode('" , "', array_keys($attributes));
         $query_parameter_string = trim(str_repeat('?,', count($attributes)), ',');
         $query_values = array_values($attributes);
+
+        if ($driver == 'postgresql') {
+            //Make sure boolean are strings
+            foreach ($query_values as &$queryValue) {
+                if (is_bool($queryValue)) {
+                    $queryValue = (
+                    $queryValue
+                        ? 'true'
+                        : 'false'
+                    );
+                }
+            }
+        }
 
         $query = 'INSERT INTO ';
 
@@ -72,8 +89,6 @@ class Create
             $query_parameter_string
         );
 
-        $driver = Database::getAdapterName();
-
         if ($return == self::RETURN_ID) {
             //Return inserted id
             if ($driver == 'postgresql') {
@@ -87,7 +102,7 @@ class Create
         } elseif ($return == self::RETURN_RECORDS) {
             //Return records
             if ($driver != 'postgresql') {
-                throw new \Phramework\Excetpions\ServerExcetion(
+                throw new \Phramework\Exceptions\ServerExcetion(
                     'RETURN_RECORDS works only with postgresql adapter'
                 );
             }

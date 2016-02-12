@@ -72,7 +72,7 @@ class Delete
               %s',
             $tableName,
             $idAttribute,
-            implode("\n", $additional)
+            implode("\n", $additional),
             (
                 $limit === null
                 ? ''
