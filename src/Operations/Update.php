@@ -63,13 +63,13 @@ class Update
             && isset($table['table'])
         ) {
 
-            $tableName = sprinf(
+            $tableName = sprintf(
                 '"%s"."%s"',
                 $table['schema'],
                 $table['table']
             );
         } else {
-            $tableName = sprinf(
+            $tableName = sprintf(
                 '"%s"',
                 $table
             );
