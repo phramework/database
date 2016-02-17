@@ -76,7 +76,7 @@ class Update
         }
 
         $query = sprintf(
-            'UPDATE %s SET %s" = ?
+            'UPDATE %s SET "%s" = ?
               WHERE "%s" = ?
               %s',
             $tableName,
@@ -85,7 +85,7 @@ class Update
             (
                 $limit === null
                 ? ''
-                : 'LIMIT ' . $limit
+                : '' //'LIMIT ' . $limit
             )
         );
 
