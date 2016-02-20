@@ -16,6 +16,9 @@
  */
 namespace Phramework\Database;
 
+use PDO;
+use Phramework\Exceptions\DatabaseException;
+
 /**
  * <br/>Defined settings:<br/>
  * <ul>

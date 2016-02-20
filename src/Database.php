@@ -45,7 +45,7 @@ use \PDO;
 class Database
 {
     /**
-     * @var Phramework\Database\IAdapter
+     * @var \Phramework\Database\IAdapter
      */
     protected static $adapter = null;
 
