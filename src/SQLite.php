@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2015 - 2016 Xenofon Spafaridis
+ * Copyright 2015-2016 Xenofon Spafaridis
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,7 +50,7 @@ class SQLite extends PostgreSQL
     {
         //Work with arrays
         if (is_object($settingsDb)) {
-            $settingsDb = (array)$settingsDb;
+            $settingsDb = (array) $settingsDb;
         }
 
         if (!($this->link = new PDO(sprintf(

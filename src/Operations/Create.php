@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2015 - 2016 Xenofon Spafaridis
+ * Copyright 2015-2016 Xenofon Spafaridis
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,8 @@
  */
 namespace Phramework\Database\Operations;
 
-use \Phramework\Database\Database;
+use Phramework\Database\Database;
+use Phramework\Exceptions\ServerException;
 
 /**
  * Create operation for databases
@@ -41,6 +42,7 @@ class Create
      * - if **`RETURN_RECORDS`** will return the inserted record
      * - if **`RETURN_NUMBER_OF_RECORDS`** will return the number of records affected
      * @return integer|array
+     * @throws ServerException
      * @todo Check RETURNING id for another primary key attribute
      */
     public static function create(
@@ -50,10 +52,8 @@ class Create
         $return = self::RETURN_ID
     ) {
         if (is_object($attributes)) {
-            $attributes = (array)$attributes;
+            $attributes = (array) $attributes;
         }
-
-
 
         $driver = Database::getAdapterName();
 
@@ -102,7 +102,7 @@ class Create
         } elseif ($return == self::RETURN_RECORDS) {
             //Return records
             if ($driver != 'postgresql') {
-                throw new \Phramework\Exceptions\ServerExcetion(
+                throw new ServerExcetion(
                     'RETURN_RECORDS works only with postgresql adapter'
                 );
             }
