@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Class Phramework\Database\MySQL | phramework/database</title>
+	<title>Class Phramework\Database\SQLite | phramework/database</title>
 
 	<link rel="stylesheet" href="resources/bootstrap.min.css?2013d626fae2f30e94006064eace0e5727ce5e7a">
 	<link rel="stylesheet" href="resources/style.css?70c1d062672daa3f906b72e4f5d03d4bc5c4174d">
@@ -85,9 +85,9 @@
 			<h3>Classes</h3>
 			<ul>
 				<li><a href="class-Phramework.Database.Database.html">Database</a></li>
-				<li class="active"><a href="class-Phramework.Database.MySQL.html">MySQL</a></li>
+				<li><a href="class-Phramework.Database.MySQL.html">MySQL</a></li>
 				<li><a href="class-Phramework.Database.PostgreSQL.html">PostgreSQL</a></li>
-				<li><a href="class-Phramework.Database.SQLite.html">SQLite</a></li>
+				<li class="active"><a href="class-Phramework.Database.SQLite.html">SQLite</a></li>
 			</ul>
 
 			<h3>Interfaces</h3>
@@ -107,14 +107,14 @@
 <div id="right">
 	<div id="rightInner">
 <div id="content" class="class">
-	<h1>Class MySQL</h1>
+	<h1>Class SQLite</h1>
 
 
 	<div class="description">
 	<p><br/>Defined settings:<br/></p>
 
 <ul>
-<li> array database <ul> <li>string  adapter</li> <li>string  name, Database name</li> <li>string  username</li> <li>string  password</li> <li>string  host</li> <li>integer port</li> </ul>
+<li> array database <ul> <li>string  adapter</li> <li>string  file, database file path</li> </ul>
 </li>
 </ul>
 	</div>
@@ -130,7 +130,7 @@
 		</dd>
 		<dd style="padding-left:30px">
 			<img src="resources/inherit.png" alt="Extended by">
-<b><span>Phramework\Database\MySQL</span></b>			
+<b><span>Phramework\Database\SQLite</span></b>			
 			
 			
 		</dd>
@@ -154,10 +154,10 @@
 				<b>Author:</b>
 				Xenofon Spafaridis <a href="&#109;&#97;&#x69;&#x6c;&#116;&#111;&#x3a;&#x6e;o&#104;&#112;&#x6f;&#x6e;&#101;&#120;&#x40;&#x67;&#109;&#97;&#x69;&#x6c;.&#99;&#111;&#x6d;">&#x6e;o&#104;&#112;&#x6f;&#x6e;&#101;&#120;&#x40;&#x67;&#109;&#97;&#x69;&#x6c;.&#99;&#111;&#x6d;</a><br>
 				<b>Since:</b>
-				0.0.0<br>
+				0.1.0<br>
 				<b>Uses:</b>
 				\PDO<br>
-			<b>Located at</b> MySQL.php		<br>
+			<b>Located at</b> SQLite.php		<br>
 	</div>
 
 
@@ -193,6 +193,10 @@
 					</dl></div>
 
 
+					<h4>Throws</h4>
+					<div class="list">
+						DatabaseException
+					</div>
 
 
 					<h4>Overrides</h4>
@@ -254,7 +258,7 @@
 			<td class="value">
 				<div>
 					<a href="#$adapterName" class="anchor">#</a>
-					<code><span class="php-quote">'mysql'</span></code>
+					<code><span class="php-quote">'sqlite'</span></code>
 				</div>
 			</td>
 		</tr>

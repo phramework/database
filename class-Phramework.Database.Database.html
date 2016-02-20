@@ -3,9 +3,9 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Class Phramework\Database\Database | phramework/database doc</title>
+	<title>Class Phramework\Database\Database | phramework/database</title>
 
-	<link rel="stylesheet" href="resources/bootstrap.min.css?973e37a8502921d56bc02bb55321f45b072b6f71">
+	<link rel="stylesheet" href="resources/bootstrap.min.css?2013d626fae2f30e94006064eace0e5727ce5e7a">
 	<link rel="stylesheet" href="resources/style.css?70c1d062672daa3f906b72e4f5d03d4bc5c4174d">
 
 </head>
@@ -14,7 +14,7 @@
 	<nav id="navigation" class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a href="index.html" class="navbar-brand">phramework/database doc</a>
+				<a href="index.html" class="navbar-brand">phramework/database</a>
 			</div>
 			<div class="collapse navbar-collapse">
 
@@ -87,6 +87,7 @@
 				<li class="active"><a href="class-Phramework.Database.Database.html">Database</a></li>
 				<li><a href="class-Phramework.Database.MySQL.html">MySQL</a></li>
 				<li><a href="class-Phramework.Database.PostgreSQL.html">PostgreSQL</a></li>
+				<li><a href="class-Phramework.Database.SQLite.html">SQLite</a></li>
 			</ul>
 
 			<h3>Interfaces</h3>
@@ -139,6 +140,10 @@
 				Xenofon Spafaridis <a href="&#109;&#97;&#x69;&#x6c;&#116;&#111;&#x3a;&#x6e;o&#104;&#112;&#x6f;&#x6e;&#101;&#120;&#x40;&#x67;&#109;&#97;&#x69;&#x6c;.&#99;&#111;&#x6d;">&#x6e;o&#104;&#112;&#x6f;&#x6e;&#101;&#120;&#x40;&#x67;&#109;&#97;&#x69;&#x6c;.&#99;&#111;&#x6d;</a><br>
 				<b>Since:</b>
 				0.0.0<br>
+				<b>Link:</b>
+				<a href="https://github.com/phramework/database">Source code</a><br>
+				<b>Link:</b>
+				<a href="https://phramework.github.io/database/">Documentation</a><br>
 				<b>Todo:</b>
 				Add option to convert fetched data into objects insted of array<br>
 			<b>Located at</b> Database.php		<br>
@@ -371,7 +376,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_executeAndFetch">#</a>
-			<code>executeAndFetch( <span>string <var>$query</var></span>, <span>array <var>$parameters</var> = []</span>, <span>array <var>$castModel</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code>executeAndFetch( <span>string <var>$query</var></span>, <span>array <var>$parameters</var> = []</span>, <span> <var>$castModel</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Execute a query and fetch first row as associative array</p>
@@ -388,8 +393,7 @@
 						<dt><var>$parameters</var></dt>
 						<dd>Query parameters</dd>
 						<dt><var>$castModel</var></dt>
-						<dd><p>[Optional] Default is null, if set then
-\Phramework\Models\Filter::castEntry will be applied to data</p></dd>
+						<dd></dd>
 					</dl></div>
 
 					<h4>Returns</h4>
@@ -428,7 +432,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_executeAndFetchAll">#</a>
-			<code>executeAndFetchAll( <span>string <var>$query</var></span>, <span>array <var>$parameters</var> = []</span>, <span>array <var>$castModel</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code>executeAndFetchAll( <span>string <var>$query</var></span>, <span>array <var>$parameters</var> = []</span>, <span> <var>$castModel</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Execute a query and fetch all rows as associative array</p>
@@ -445,8 +449,7 @@
 						<dt><var>$parameters</var></dt>
 						<dd>Query parameters</dd>
 						<dt><var>$castModel</var></dt>
-						<dd><p>[Optional] Default is null, if set then
-\Phramework\Models\Filter::cast will be applied to data</p></dd>
+						<dd></dd>
 					</dl></div>
 
 					<h4>Returns</h4>
@@ -675,7 +678,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#_bindExecuteAndFetch">#</a>
-			<code>bindExecuteAndFetch( <span>string <var>$query</var></span>, <span>array <var>$parameters</var> = []</span>, <span>array <var>$castModel</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code>bindExecuteAndFetch( <span>string <var>$query</var></span>, <span>array <var>$parameters</var> = []</span>, <span> <var>$castModel</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Bind Execute a query and fetch first row as associative array</p>
@@ -692,8 +695,7 @@
 						<dt><var>$parameters</var></dt>
 						<dd>Query parameters</dd>
 						<dt><var>$castModel</var></dt>
-						<dd><p>[Optional] Default is null, if set
-then \Phramework\Models\Filter::castEntry will be applied to data</p></dd>
+						<dd></dd>
 					</dl></div>
 
 					<h4>Returns</h4>
@@ -722,7 +724,7 @@ then \Phramework\Models\Filter::castEntry will be applied to data</p></dd>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_bindExecuteAndFetchAll">#</a>
-			<code>bindExecuteAndFetchAll( <span>string <var>$query</var></span>, <span>array <var>$parameters</var> = []</span>, <span>array <var>$castModel</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code>bindExecuteAndFetchAll( <span>string <var>$query</var></span>, <span>array <var>$parameters</var> = []</span>, <span> <var>$castModel</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Bind Execute a query and fetch all rows as associative array</p>
@@ -739,8 +741,7 @@ then \Phramework\Models\Filter::castEntry will be applied to data</p></dd>
 						<dt><var>$parameters</var></dt>
 						<dd>Query parameters</dd>
 						<dt><var>$castModel</var></dt>
-						<dd><p>[Optional] Default is null, if set then
-\Phramework\Models\Filter::castEntry will be applied to data</p></dd>
+						<dd></dd>
 					</dl></div>
 
 					<h4>Returns</h4>
@@ -839,7 +840,7 @@ then \Phramework\Models\Filter::castEntry will be applied to data</p></dd>
 	</div>
 
 	<div id="footer">
-		phramework/database doc API documentation generated by <a href="http://apigen.org">ApiGen</a>
+		phramework/database API documentation generated by <a href="http://apigen.org">ApiGen</a>
 	</div>
 </div>
 <script src="resources/combined.js"></script>
