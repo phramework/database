@@ -66,7 +66,7 @@ class Delete
         }
 
         $query = sprintf(
-            'DELETE FROM "%s"
+            'DELETE FROM %s
             WHERE "%s" = ?
               %s
               %s',
