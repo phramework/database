@@ -41,6 +41,9 @@ class Delete
      */
     public static function delete($id, $additionalAttributes, $table, $idAttribute = 'id', $limit = 1)
     {
+        //force disable limit because they wont work with postgreqsql
+        $limit = null;
+
         $queryValues = [$id];
 
         $additional = [];
