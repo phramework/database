@@ -16,7 +16,6 @@
   },
   "require": {
     "php": ">=7",
-    "ext-json": "*",
     "phramework/exceptions": "^1.0"
   },
   "require-dev": {

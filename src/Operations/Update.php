@@ -37,6 +37,7 @@ class Update
       * @param  null|integer   $limit                **[Optional]**
       *     Limit clause, when null there is not limit.
       * @todo Add $additionalAttributes
+      * @deprecated
       */
     public static function update($id, $keysValues, $table, $idAttribute = 'id', $limit = 1)
     {

@@ -38,6 +38,7 @@ class Delete
      * @param  null|integer   $limit                **[Optional]**
      *     Limit clause, when null there is not limit.
      * @return integer Return number of affected records
+     * @deprecated
      */
     public static function delete($id, $additionalAttributes, $table, $idAttribute = 'id', $limit = 1)
     {

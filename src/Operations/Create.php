@@ -44,6 +44,7 @@ class Create
      * @return integer|array
      * @throws ServerException
      * @todo Check RETURNING id for another primary key attribute
+     * @deprecated
      */
     public static function create(
         $attributes,
