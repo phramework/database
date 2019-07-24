@@ -16,8 +16,8 @@
  */
 namespace Phramework\Database\Operations;
 
-use Phramework\Database\Database;
-use Phramework\Exceptions\ServerException;
+use Phramework\Database\IAdapter;
+use Phramework\Exceptions\DatabaseException;
 
 /**
  * Create operation for databases
@@ -27,14 +27,21 @@ use Phramework\Exceptions\ServerException;
  */
 class Create
 {
+    /** @var IAdapter */
+    protected $adapter;
 
-    const RETURN_ID = 1;
-    const RETURN_RECORDS = 2;
-    const RETURN_NUMBER_OF_RECORDS = 4;
+    public function __construct(IAdapter $adapter)
+    {
+        $this->adapter = $adapter;
+    }
+
+    public const RETURN_ID = 1;
+    public const RETURN_RECORDS = 2;
+    public const RETURN_NUMBER_OF_RECORDS = 4;
 
     /**
      * Create a new record in database
-     * @param  array|object $attributes  Key-value array or object with records's attributes
+     * @param  object $attributes  Key-value array or object with records's attributes
      * @param  string $table       Table's name
      * @param  string|null $schema *[Optional]* Table's schema, default is null for no schema
      * @param  integer $return     Return method type
@@ -42,28 +49,27 @@ class Create
      * - if **`RETURN_RECORDS`** will return the inserted record
      * - if **`RETURN_NUMBER_OF_RECORDS`** will return the number of records affected
      * @return integer|array
-     * @throws ServerException
-     * @todo Check RETURNING id for another primary key attribute
-     * @deprecated
+     * @throws DatabaseException
+     * @throws \Exception
      */
-    public static function create(
-        $attributes,
-        $table,
-        $schema = null,
+    public function create(
+        \stdClass $attributes,
+        string $table,
+        ?string $schema = null,
         $return = self::RETURN_ID
     ) {
         if (is_object($attributes)) {
             $attributes = (array) $attributes;
         }
 
-        $driver = Database::getAdapterName();
+        $driver = $this->adapter->getAdapterName();
 
         //prepare query
         $query_keys   = implode('" , "', array_keys($attributes));
         $query_parameter_string = trim(str_repeat('?,', count($attributes)), ',');
         $query_values = array_values($attributes);
 
-        if ($driver == 'postgresql') {
+        if ($driver === 'postgresql') {
             //Make sure boolean are strings
             foreach ($query_values as &$queryValue) {
                 if (is_bool($queryValue)) {
@@ -90,29 +96,31 @@ class Create
             $query_parameter_string
         );
 
-        if ($return == self::RETURN_ID) {
+        if ($return === self::RETURN_ID) {
             //Return inserted id
-            if ($driver == 'postgresql') {
+            if ($driver === 'postgresql') {
                 $query .= ' RETURNING id';
 
-                $id = Database::executeAndFetch($query, $query_values);
+                $id = $this->adapter->executeAndFetch($query, $query_values);
                 return $id['id'];
             }
 
-            return Database::executeLastInsertId($query, $query_values);
-        } elseif ($return == self::RETURN_RECORDS) {
+            return $this->adapter->executeLastInsertId($query, $query_values);
+        }
+
+        if ($return === self::RETURN_RECORDS) {
             //Return records
-            if ($driver != 'postgresql') {
-                throw new ServerExcetion(
+            if ($driver !== 'postgresql') {
+                throw new \Exception(
                     'RETURN_RECORDS works only with postgresql adapter'
                 );
             }
 
             $query .= 'RETURNING *';
-            return Database::executeAndFetch($query, $query_values);
-        } else {
-            //Return number of records affected
-            return Database::execute($query, $query_values);
+            return $this->adapter->executeAndFetch($query, $query_values);
         }
+
+        //Return number of records affected
+        return $this->adapter->execute($query, $query_values);
     }
 }

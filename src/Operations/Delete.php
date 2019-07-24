@@ -16,7 +16,8 @@
  */
 namespace Phramework\Database\Operations;
 
-use \Phramework\Database\Database;
+use Phramework\Database\IAdapter;
+use Phramework\Exceptions\DatabaseException;
 
 /**
  * Delete operation for databases
@@ -26,22 +27,35 @@ use \Phramework\Database\Database;
  */
 class Delete
 {
+    /** @var IAdapter */
+    protected $adapter;
+
+    public function __construct(IAdapter $adapter)
+    {
+        $this->adapter = $adapter;
+    }
+
     /**
      * Delete database records
-     * @param  string|integer $id
+     * @param  string $id
      *     Id value
-     * @param  array|object   $additionalAttributes
+     * @param  \stdClass   $additionalAttributes
      *     Additional attributes to use in WHERE $idAttribute
-     * @param  string|array   $table                Table's name
      * @param  string         $idAttribute          **[Optional]**
      *     Id attribute
      * @param  null|integer   $limit                **[Optional]**
      *     Limit clause, when null there is not limit.
      * @return integer Return number of affected records
-     * @deprecated
+     * @throws DatabaseException
      */
-    public static function delete($id, $additionalAttributes, $table, $idAttribute = 'id', $limit = 1)
-    {
+    public function delete(
+        string $id,
+        \stdClass $additionalAttributes,
+        string $table,
+        ?string $schema = null,
+        string $idAttribute = 'id',
+        int $limit = 1
+    ) {
         $queryValues = [$id];
 
         $additional = [];
@@ -56,14 +70,17 @@ class Delete
             $queryValues[] = $value;
         }
 
-        $tableName = '';
-        if (is_array($table) &&
-            isset($table['schema']) &&
-            isset($table['table'])) {
-            $tableName = '"' . $table['schema'] . '"'
-                .'."' . $table['table'] . '"';
+        if ($schema !== null) {
+            $tableName = sprintf(
+                '"%s"."%s"',
+                $schema,
+                $table
+            );
         } else {
-            $tableName = '"' . $table . '"';
+            $tableName = sprintf(
+                '"%s"',
+                $table
+            );
         }
 
         $query = sprintf(
@@ -81,6 +98,6 @@ class Delete
             )
         );
 
-        return Database::execute($query, $queryValues);
+        return $this->adapter->execute($query, $queryValues);
     }
 }
