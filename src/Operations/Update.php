@@ -16,8 +16,8 @@
  */
 namespace Phramework\Database\Operations;
 
-use \Phramework\Database\Database;
-use \Phramework\Exceptions\NotFoundException;
+use Phramework\Database\IAdapter;
+use Phramework\Exceptions\DatabaseException;
 
 /**
  * Update operation for databases
@@ -27,19 +27,25 @@ use \Phramework\Exceptions\NotFoundException;
  */
 class Update
 {
+    /** @var IAdapter */
+    protected $adapter;
+
+    public function __construct(IAdapter $adapter)
+    {
+        $this->adapter = $adapter;
+    }
+
      /**
       * Update database records
       * @param  string|integer $id
-      * @param  array|object   $keysValues
-      * @param  string|array   $table                Table's name
-      * @param  string         $idAttribute          **[Optional]** Id attribute
+      * @param  object   $keysValues
       * @return integer Return number of affected records
       * @param  null|integer   $limit                **[Optional]**
       *     Limit clause, when null there is not limit.
       * @todo Add $additionalAttributes
-      * @deprecated
+      * @throws DatabaseException
       */
-    public static function update($id, $keysValues, $table, $idAttribute = 'id', $limit = 1)
+    public function update($id, \stdClass $keysValues, string $table, ?string $schema = null, $idAttribute = 'id')
     {
         //Work with arrays
         if (is_object($keysValues)) {
@@ -52,22 +58,12 @@ class Update
         //Push id to the end
         $queryValues[] = $id;
 
-        $tableName = '';
 
-        //Work with array
-        if (is_object($table)) {
-            $table = (array)$table;
-        }
-
-        if (is_array($table)
-            && isset($table['schema'])
-            && isset($table['table'])
-        ) {
-
+        if ($schema !== null) {
             $tableName = sprintf(
                 '"%s"."%s"',
-                $table['schema'],
-                $table['table']
+                $schema,
+                $table
             );
         } else {
             $tableName = sprintf(
@@ -78,20 +74,14 @@ class Update
 
         $query = sprintf(
             'UPDATE %s SET "%s" = ?
-              WHERE "%s" = ?
-              %s',
+              WHERE "%s" = ?',
             $tableName,
             $queryKeys,
-            $idAttribute,
-            (
-                $limit === null
-                ? ''
-                : '' //'LIMIT ' . $limit
-            )
+            $idAttribute
         );
 
         //Return number of rows affected
-        $result = Database::execute($query, $queryValues);
+        $result = $this->adapter->execute($query, $queryValues);
 
         return $result;
     }
