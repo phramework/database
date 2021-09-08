@@ -17,7 +17,6 @@
 namespace Phramework\Database;
 
 use \PDO;
-use \Phramework\Exceptions\DatabaseException;
 
 /**
  * <br/>Defined settings:<br/>
@@ -62,7 +61,7 @@ class PostgreSQL implements \Phramework\Database\IAdapter
 
     /**
      * @param object
-     * @throws DatabaseException
+     * @throws \RuntimeException
      */
     public function __construct($settingsDb)
     {
@@ -79,7 +78,7 @@ class PostgreSQL implements \Phramework\Database\IAdapter
             $settingsDb['password'],
             $settingsDb['port']
         )))) {
-            throw new DatabaseException('Cannot connect to database');
+            throw new \RuntimeException('Cannot connect to database');
         }
 
         $this->link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -91,7 +90,7 @@ class PostgreSQL implements \Phramework\Database\IAdapter
      * @param string $query
      * @param array $parameters
      * @return integer Returns the number of rows affected or selected
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws \Exception
      */
     public function execute($query, $parameters = [])
     {
@@ -106,7 +105,7 @@ class PostgreSQL implements \Phramework\Database\IAdapter
      * @param  string $query
      * @param  array  $parameters Query parameters
      * @return mixed Returns the id of last inserted item
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws \Exception
      */
     public function executeLastInsertId($query, $parameters = [])
     {
@@ -121,7 +120,7 @@ class PostgreSQL implements \Phramework\Database\IAdapter
      * @param  string $query
      * @param  array  $parameters Query parameters
      * @return array Returns a single row from database
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws \Exception
      */
     public function executeAndFetch($query, $parameters = [], $castModel = null)
     {
@@ -144,7 +143,7 @@ class PostgreSQL implements \Phramework\Database\IAdapter
      * @param  string $query
      * @param  array  $parameters Query parameters
      * @return array[] Returns multiple rows from database
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws \Exception
      */
     public function executeAndFetchAll($query, $parameters = [], $castModel = null)
     {
@@ -166,7 +165,7 @@ class PostgreSQL implements \Phramework\Database\IAdapter
      * @param  string $query
      * @param  array  $parameters Query parameters
      * @return array
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws \Exception
      */
     public function executeAndFetchArray($query, $parameters = [])
     {
@@ -183,7 +182,7 @@ class PostgreSQL implements \Phramework\Database\IAdapter
      * @param  string $query Query string
      * @param  array  $parameters Query parameters
      * @return array[]
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws \Exception
      * @uses PDO::FETCH_COLUMN
      */
     public function executeAndFetchAllArray($query, $parameters = [])
@@ -203,7 +202,7 @@ class PostgreSQL implements \Phramework\Database\IAdapter
      * @param string $query Query string
      * @param array  $parameters Query parameters
      * @return mixed
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws \Exception
      */
     public function bindExecuteLastInsertId($query, $parameters = [])
     {
@@ -236,7 +235,7 @@ class PostgreSQL implements \Phramework\Database\IAdapter
      * @param  string $query Query string
      * @param  array  $parameters Query parameters
      * @return integer
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws \Exception
      * @todo provide documentation
      */
     public function bindExecute($query, $parameters = [])
@@ -269,7 +268,7 @@ class PostgreSQL implements \Phramework\Database\IAdapter
      * @param  string $query Query string
      * @param  array  $parameters Query parameters
      * @return array
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws \Exception
      */
     public function bindExecuteAndFetch($query, $parameters = [], $castModel = null)
     {
@@ -307,7 +306,7 @@ class PostgreSQL implements \Phramework\Database\IAdapter
      * @param  string $query Query string
      * @param  array  $parameters Query parameters
      * @return array[]
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws \Exception
      */
     public function bindExecuteAndFetchAll($query, $parameters = [], $castModel = null)
     {

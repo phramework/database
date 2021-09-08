@@ -16,8 +16,7 @@
  */
 namespace Phramework\Database\Operations;
 
-use \Phramework\Database\Database;
-use \Phramework\Exceptions\NotFoundException;
+use Phramework\Database\IAdapter;
 
 /**
  * Update operation for databases
@@ -27,6 +26,14 @@ use \Phramework\Exceptions\NotFoundException;
  */
 class Update
 {
+    /** @var IAdapter */
+    private $adapter;
+
+    public function __construct(IAdapter $adapter)
+    {
+        $this->adapter = $adapter;
+    }
+
      /**
       * Update database records
       * @param  string|integer $id
@@ -37,9 +44,8 @@ class Update
       * @param  null|integer   $limit                **[Optional]**
       *     Limit clause, when null there is not limit.
       * @todo Add $additionalAttributes
-      * @deprecated
       */
-    public static function update($id, $keysValues, $table, $idAttribute = 'id', $limit = 1)
+    public function update($id, $keysValues, $table, $idAttribute = 'id', $limit = 1)
     {
         //Work with arrays
         if (is_object($keysValues)) {
@@ -63,7 +69,6 @@ class Update
             && isset($table['schema'])
             && isset($table['table'])
         ) {
-
             $tableName = sprintf(
                 '"%s"."%s"',
                 $table['schema'],
@@ -78,21 +83,13 @@ class Update
 
         $query = sprintf(
             'UPDATE %s SET "%s" = ?
-              WHERE "%s" = ?
-              %s',
+              WHERE "%s" = ?',
             $tableName,
             $queryKeys,
-            $idAttribute,
-            (
-                $limit === null
-                ? ''
-                : '' //'LIMIT ' . $limit
-            )
+            $idAttribute
         );
 
         //Return number of rows affected
-        $result = Database::execute($query, $queryValues);
-
-        return $result;
+        return $this->adapter->execute($query, $queryValues);
     }
 }

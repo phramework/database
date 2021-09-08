@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace Phramework\Database;
 
-use Phramework\Exceptions\DatabaseException;
-
 /**
  * @author Xenofon Spafaridis <nohponex@gmail.com>
  */
@@ -23,7 +21,7 @@ class LazyPostgresqlAdapter implements IAdapter
     }
 
     /**
-     * @throws DatabaseException
+     * @throws \Exception
      */
     private function getAdapter(): IAdapter
     {

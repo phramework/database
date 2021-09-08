@@ -16,7 +16,7 @@
  */
 namespace Phramework\Database\Operations;
 
-use \Phramework\Database\Database;
+use Phramework\Database\IAdapter;
 
 /**
  * Delete operation for databases
@@ -26,6 +26,14 @@ use \Phramework\Database\Database;
  */
 class Delete
 {
+    /** @var IAdapter */
+    private $adapter;
+
+    public function __construct(IAdapter $adapter)
+    {
+        $this->adapter = $adapter;
+    }
+
     /**
      * Delete database records
      * @param  string|integer $id
@@ -38,9 +46,8 @@ class Delete
      * @param  null|integer   $limit                **[Optional]**
      *     Limit clause, when null there is not limit.
      * @return integer Return number of affected records
-     * @deprecated
      */
-    public static function delete($id, $additionalAttributes, $table, $idAttribute = 'id', $limit = 1)
+    public function delete($id, $additionalAttributes, $table, $idAttribute = 'id', $limit = 1)
     {
         $queryValues = [$id];
 
@@ -81,6 +88,6 @@ class Delete
             )
         );
 
-        return Database::execute($query, $queryValues);
+        return $this->adapter->execute($query, $queryValues);
     }
 }

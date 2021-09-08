@@ -16,8 +16,7 @@
  */
 namespace Phramework\Database\Operations;
 
-use Phramework\Database\Database;
-use Phramework\Exceptions\ServerException;
+use Phramework\Database\IAdapter;
 
 /**
  * Create operation for databases
@@ -27,10 +26,17 @@ use Phramework\Exceptions\ServerException;
  */
 class Create
 {
-
     const RETURN_ID = 1;
     const RETURN_RECORDS = 2;
     const RETURN_NUMBER_OF_RECORDS = 4;
+
+    /** @var IAdapter */
+    private $adapter;
+
+    public function __construct(IAdapter $adapter)
+    {
+        $this->adapter = $adapter;
+    }
 
     /**
      * Create a new record in database
@@ -42,11 +48,10 @@ class Create
      * - if **`RETURN_RECORDS`** will return the inserted record
      * - if **`RETURN_NUMBER_OF_RECORDS`** will return the number of records affected
      * @return integer|array
-     * @throws ServerException
+     * @throws \Exception
      * @todo Check RETURNING id for another primary key attribute
-     * @deprecated
      */
-    public static function create(
+    public function create(
         $attributes,
         $table,
         $schema = null,
@@ -56,7 +61,7 @@ class Create
             $attributes = (array) $attributes;
         }
 
-        $driver = Database::getAdapterName();
+        $driver = $this->adapter->getAdapterName();
 
         //prepare query
         $query_keys   = implode('" , "', array_keys($attributes));
@@ -95,24 +100,26 @@ class Create
             if ($driver == 'postgresql') {
                 $query .= ' RETURNING id';
 
-                $id = Database::executeAndFetch($query, $query_values);
+                $id = $this->adapter->executeAndFetch($query, $query_values);
                 return $id['id'];
             }
 
-            return Database::executeLastInsertId($query, $query_values);
-        } elseif ($return == self::RETURN_RECORDS) {
+            return $this->adapter->executeLastInsertId($query, $query_values);
+        }
+
+        if ($return == self::RETURN_RECORDS) {
             //Return records
-            if ($driver != 'postgresql') {
-                throw new ServerExcetion(
+            if ($driver !== 'postgresql') {
+                throw new \InvalidArgumentException(
                     'RETURN_RECORDS works only with postgresql adapter'
                 );
             }
 
             $query .= 'RETURNING *';
-            return Database::executeAndFetch($query, $query_values);
-        } else {
-            //Return number of records affected
-            return Database::execute($query, $query_values);
+            return $this->adapter->executeAndFetch($query, $query_values);
         }
+
+        //Return number of records affected
+        return $this->adapter->execute($query, $query_values);
     }
 }

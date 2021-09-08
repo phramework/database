@@ -35,7 +35,7 @@ interface IAdapter
      * @param string $query
      * @param array $parameters
      * @return integer
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws \Exception
      */
     public function execute($query, $parameters = []);
 
@@ -45,7 +45,7 @@ interface IAdapter
      * @param  string $query
      * @param  array  $parameters Query parameters
      * @return integer Returns the number of rows affected or selected
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws \Exception
      */
     public function executeLastInsertId($query, $parameters = []);
 
@@ -56,7 +56,7 @@ interface IAdapter
      * @param  string $query
      * @param  array  $parameters Query parameters
      * @return array Returns a single row
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws \Exception
      */
     public function executeAndFetch($query, $parameters = [], $castModel = null);
 
@@ -66,17 +66,16 @@ interface IAdapter
      * @param  string $query
      * @param  array  $parameters Query parameters
      * @return array[]
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws \Exception
      */
     public function executeAndFetchAll($query, $parameters = [], $castModel = null);
-
 
     /**
      * Execute a query and fetch first row as array
      * @param string $query
      * @param array  $parameters Query parameters
      * @return array
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws \Exception
      */
     public function executeAndFetchArray($query, $parameters = []);
 
@@ -85,7 +84,7 @@ interface IAdapter
      * @param string $query Query string
      * @param array  $parameters Query parameters
      * @return array[]
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws \Exception
      */
     public function executeAndFetchAllArray($query, $parameters = []);
 
@@ -95,7 +94,7 @@ interface IAdapter
      * @param  string $query Query string
      * @param  array Query parameters
      * @return mixed
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws \Exception
      */
     public function bindExecuteLastInsertId($query, $parameters = []);
 
@@ -105,7 +104,7 @@ interface IAdapter
      * @param string $query Query string
      * @param array  $parameters Query parameters
      * @return integer
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws \Exception
      * @todo provide documentation
      */
     public function bindExecute($query, $parameters = []);
@@ -116,7 +115,7 @@ interface IAdapter
      * @param  string $query Query string
      * @param  array  $parameters Query parameters
      * @return array
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws \Exception
      */
     public function bindExecuteAndFetch($query, $parameters = [], $castModel = null);
 
@@ -126,7 +125,7 @@ interface IAdapter
      * @param  string $query Query string
      * @param  array  $parameters Query parameters
      * @return array[]
-     * @throws \Phramework\Exceptions\DatabaseException
+     * @throws \Exception
      */
     public function bindExecuteAndFetchAll($query, $parameters = [], $castModel = null);
 

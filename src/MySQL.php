@@ -16,8 +16,8 @@
  */
 namespace Phramework\Database;
 
+use http\Exception\RuntimeException;
 use \PDO;
-use \Phramework\Exceptions\DatabaseException;
 
 /**
  * <br/>Defined settings:<br/>
@@ -48,7 +48,7 @@ class MySQL extends \Phramework\Database\PostgreSQL
 
     /**
      * @param object
-     * @throws DatabaseException
+     * @throws \RuntimeException
      */
     public function __construct($settingsDb)
     {
@@ -71,7 +71,7 @@ class MySQL extends \Phramework\Database\PostgreSQL
             $settingsDb['password'],
             $options
         ))) {
-            throw new DatabaseException('Cannot connect to database');
+            throw new RuntimeException('Cannot connect to database');
         }
 
         $this->link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

@@ -17,7 +17,6 @@
 namespace Phramework\Database;
 
 use PDO;
-use Phramework\Exceptions\DatabaseException;
 
 /**
  * <br/>Defined settings:<br/>
@@ -44,7 +43,7 @@ class SQLite extends PostgreSQL
 
     /**
      * @param object $settingsDb
-     * @throws DatabaseException
+     * @throws \RuntimeException
      */
     public function __construct($settingsDb)
     {
@@ -58,7 +57,7 @@ class SQLite extends PostgreSQL
             $settingsDb['file']
         )))
         ) {
-            throw new DatabaseException('Cannot connect to database');
+            throw new \RuntimeException('Cannot connect to database');
         }
 
         $this->link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
